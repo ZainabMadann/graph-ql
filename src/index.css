@@ -1,13 +1,21 @@
-html, body {
-    height: 100%;
+* {
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
     background-color: #130324;
 }
 
-#loginbox {
+#home-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/* #loginbox {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -16,6 +24,13 @@ html, body {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 input {
@@ -55,11 +70,166 @@ img {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
 }
 
-#klam{
+#AuditsRatioDiv {
+    background-color: #755f7d;
+    width: 250px;
+    margin-left: 80px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 80px;
+}
+
+#ratio-container {
+    padding: 15px 10px 0;
+}
+
+#AuditsRatioDiv p {
     color: #ffffff;
+    margin: 0;
+}
+
+#ratio-span {
+    color: #ccc;
+}
+
+#bestSkillsDiv {
+    width: 400px;
+    height: 300px;
+    background-color: #bd9ddf;
+    margin-top: 20px;
+}*/
+
+#welcome-msg {
+    color: #ffffff;
+    font-size: 35px;
+    /* margin-left: 80px;
+    margin-top: 20px;
+    margin-right: 80px; */
+    /* display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%; */
+    margin: 20px;
+}
+
+
+/* #progressDiv {
+    background-color: #c9abd5;
+    width: 650px;
+    margin-left: 80px;
+    padding-left: 20px;
+}
+
+#userInfo {
+    color: #431e51;
+    background-color: #b99dc4;
+    margin-left: 80px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 200px;
+    height: 110px;
+}*/
+
+/* #RatioDiv {
+    color: #ffffff;
+    background-color: #a786b2;
+}   */
+
+/* #ratio-info-container {
+    display: flex;
+    flex-direction: column;
+}  */
+
+#left-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    gap: 20px;
+}
+
+#right-container {
+    width: 50%;
+    height: 100%;
+}
+
+#graphs-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: 100%;
+}
+
+#upper-leftDiv {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#AuditsDiv {
+    width: 50%;
+    /* display: flex;
+    flex-direction: row; */
+}
+
+#RatioDiv {
+    color: #ffffff;
+    background-color: #a786b2;
+    height: 50%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /* margin: 20px; */
+    margin: 10px 20px ;
+}
+
+
+#title-ratio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#userInfo {
+    color: #431e51;
+    background-color: #b99dc4;
+    height: 50%;
+    padding: 20px;
+    /* margin: 10px 20px ; */
+    margin-right: 50px;
+    margin-left :20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+#bestSkillsDiv {
+    background-color: #bd9ddf;
+    margin: 20px;
+}
+
+#left-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#progressDiv {
+    background-color: #c9abd5;
+    margin: 20px;
+}
+
+#AduitsResultsDiv{
+    background-color: #a786b2;
+    /* height: 100%;
+    width: 100%; */
+    padding: 20px;
+    margin: 20px;
 }

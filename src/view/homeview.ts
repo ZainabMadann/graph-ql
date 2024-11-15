@@ -1,102 +1,42 @@
-import ApexCharts from 'apexcharts'
-
 import van from "vanjs-core";
+import { renderBestSkillsChart, renderProgressChart, renderRatioChart } from "./chartsview";
+import { AduitsResultsView, AuditRatioView, UserInfoView } from "./auditsview";
 
-const { div } = van.tags
+const { div , p , span , br } = van.tags
 
 export function showHomePage() {
-    document.body.innerHTML = ''
+  document.body.innerHTML = ''
 
-    document.body.appendChild(homeview())
+  document.body.appendChild(homeview())
 }
 
 function homeview(): HTMLDivElement {
-    const chartDiv = div()
-    const homediv = div(
-        {id:'home-container'},
-        chartDiv)
-    
-    xpChart(chartDiv)
-    return homediv
+  const chartDiv = div({ id: 'chartDiv'})
+  const progressDiv = div({ id: 'progressDiv'})
+  const bestSkillsDiv = div({id:'bestSkillsDiv'})
+
+  const homediv = div({ id: 'home-container' },
+  div(span({id:"welcome-msg"},"Welcome Zainab!")),
+    div({id:'graphs-container'},
+      div({id:'left-container'},
+          div({id:'upper-leftDiv'},
+            div({id:'left-left'},
+              AuditRatioView(chartDiv),
+              UserInfoView()
+            ),
+            bestSkillsDiv
+          ),
+          progressDiv,
+      ),
+      div({id:'right-container'},
+        AduitsResultsView()
+      ),
+    )
+  )
+
+  renderProgressChart(progressDiv)
+  renderRatioChart(chartDiv)
+  renderBestSkillsChart(bestSkillsDiv)
+  return homediv
 }
 
-function xpChart(el: HTMLDivElement) {
-    const options = {
-        series: [
-            {
-                name: "up",
-                data: [28, 29, 33, 36, 32, 32, 33]
-            },
-            {
-                name: "down",
-                data: [12, 11, 14, 18, 17, 13, 13]
-            }
-        ],
-        chart: {
-            animations: {
-                enabled: false,
-            },
-            height: 350,
-            type: 'line',
-            dropShadow: {
-                enabled: true,
-                color: '#000',
-                top: 18,
-                left: 7,
-                blur: 10,
-                opacity: 0.2
-            },
-            zoom: {
-                enabled: false
-            },
-            toolbar: {
-                show: false
-            }
-        },
-        colors: ['#77B6EA', '#545454'],
-        dataLabels: {
-            enabled: true,
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        title: {
-            text: 'Average High & Low Temperature',
-            align: 'left'
-        },
-        grid: {
-            borderColor: '#e7e7e7',
-            row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-            },
-        },
-        markers: {
-            size: 1
-        },
-        xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-            title: {
-                text: 'Month'
-            }
-        },
-        yaxis: {
-            title: {
-                text: 'Temperature'
-            },
-            min: 5,
-            max: 40
-        },
-        legend: {
-            position: 'top',
-            horizontalAlign: 'right',
-            floating: true,
-            offsetY: -25,
-            offsetX: -5
-        }
-    };
-
-    const chart = new ApexCharts(el, options)
-    chart.render()
-
-}
