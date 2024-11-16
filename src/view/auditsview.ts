@@ -6,7 +6,7 @@ export function AuditRatioView(el : HTMLDivElement) :HTMLDivElement{
     return div({ id: 'RatioDiv' },
         div({id:'title-ratio'},
             p("Audits ratio"),
-            span({ id: 'ratio-span' }, "1.1"),
+            span({ id: 'ratio-span' }),
         ),
         el
     )  

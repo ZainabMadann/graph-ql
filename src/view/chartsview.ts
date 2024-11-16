@@ -1,9 +1,28 @@
 import ApexCharts from 'apexcharts'
+import UserRatioModel from '../model/userRatioModel';
 
-export function renderRatioChart(el: HTMLDivElement) {
+export async function renderRatioChart(el: HTMLDivElement) {
+    const [userdata, error] = await UserRatioModel()
+    if (error){
+        console.error(error.message)
+        alert(`error: ${error.message}`)
+        return
+    }
+    // console.log(userdata.totalUp ,userdata.totalDown  )
+    //@ts-ignore
+    const roundedTotalUp = (userdata.totalUp / 1000000).toFixed(2)
+    //@ts-ignore
+    const roundedTotalDown = (userdata.totalDown / 1000000).toFixed(2)
+
+    const audit = document.getElementById('ratio-span')
+    if(!audit){
+        return
+    }
+    const srtRatio = userdata.totalRatio.toFixed(1)
+    audit.textContent = srtRatio
     const options = {
         series: [{
-            data: [1100, 1380]
+            data: [roundedTotalUp, roundedTotalDown]
         }],
         chart: {
             type: 'bar',
@@ -55,11 +74,14 @@ export function renderRatioChart(el: HTMLDivElement) {
             }
         }
     };
-
     setTimeout(() => {
         const chart = new ApexCharts(el, options);
         chart.render()
     }, 0)
+    // setTimeout(() => {
+    //     const chart = new ApexCharts(el, options);
+    //     chart.render()
+    // }, 0)
 }
 
 export function renderProgressChart(el: HTMLDivElement) {

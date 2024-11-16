@@ -50,8 +50,7 @@ async function loginHandler(e: SubmitEvent) {
         }
 
         const data = await response.text()
-
-        localStorage.setItem('jwt', data)
+        localStorage.setItem('jwt', data.slice(1, -1))
         showHomePage()
     } catch (error) {
         console.error('Error:', error);
