@@ -19,6 +19,7 @@ export default async function UserRatioModel(): Promise<Result<UserRatio>> {
                     login
                 }
             }`
+         ,variables:{}
     }
     
     const [data, error] = await fetchQuery(query)

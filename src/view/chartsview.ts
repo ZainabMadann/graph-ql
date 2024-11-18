@@ -1,6 +1,6 @@
 import ApexCharts from 'apexcharts'
 import UserRatioModel from '../model/userRatioModel';
-import UserInfoModel from '../model/userInfoModel';
+import UserInfoModel, { getLastAudit, getLastProject } from '../model/userInfoModel';
 
 export async function renderUserInfo() {
     const [info,error] = await UserInfoModel()
@@ -14,9 +14,31 @@ export async function renderUserInfo() {
     if (!welcomemsg){
         return
     }
+    const levelspan = document.getElementById('levelspan')
+    if (!levelspan){
+        return
+    }
+    const level = info.Level.toString()
+    levelspan.textContent = level
     welcomemsg.textContent = "Welcome "+useername +" !"
 
+    const project = await getLastProject()
+    const lastproject = document.getElementById('lastprojectspan')
+    if (!lastproject){
+        return
+    }
+    lastproject.textContent = project
+    const lastaudit = await getLastAudit()
+    console.log(lastaudit)
+    const lastauditspan = document.getElementById('lastAuditspan')
+    if (!lastauditspan){
+        return
+    }
+    //@ts-ignore
+    const last =  lastaudit[0].Name + " - " + lastaudit[0].Captain
+    lastauditspan.textContent = last
 }
+
 export async function renderRatioChart(el: HTMLDivElement) {
     const [userdata, error] = await UserRatioModel()
     if (error){

@@ -16,9 +16,11 @@ export function AuditRatioView(el : HTMLDivElement) :HTMLDivElement{
 export function UserInfoView() :HTMLDivElement{
     return div(
         {id:'userInfo'},
-        "level : 39",
+        "Your Current Level is ", span({id:'levelspan'}),
         br()
-        ,"last project is rtf"
+        ,"Your Last Project  is ",span({id:'lastprojectspan'}),
+        br()
+        ,"Your Last Audit ",span({id:'lastAuditspan'}),
     )
 }
 
