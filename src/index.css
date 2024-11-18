@@ -13,6 +13,9 @@ body {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    gap: 20px;
 }
 
 /* #loginbox {
@@ -115,7 +118,7 @@ img {
     flex-direction: column;
     width: 100%;
     height: 100%; */
-    margin: 20px;
+    /* margin: 20px; */
 }
 
 
@@ -152,6 +155,7 @@ img {
     width: 50%;
     height: 100%;
     gap: 20px;
+
 }
 
 #right-container {
@@ -162,15 +166,16 @@ img {
 #graphs-container {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 40px;
     height: 100%;
+    padding: 0 20px;
 }
 
 #upper-leftDiv {
     height: 50%;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 20px;
 }
 
 #AuditsDiv {
@@ -188,7 +193,7 @@ img {
     flex-direction: column;
     padding: 20px;
     /* margin: 20px; */
-    margin: 10px 20px ;
+    /* margin: 10px 20px ; */
 }
 
 
@@ -204,26 +209,28 @@ img {
     height: 50%;
     padding: 20px;
     /* margin: 10px 20px ; */
-    margin-right: 50px;
+    /* margin-right: 50px;
     margin-left :20px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; */
     font-size: 20px;
 }
 
 #bestSkillsDiv {
     background-color: #bd9ddf;
-    margin: 20px;
+    width: 50%;
+    padding-top: 10px;
+    /* margin: 20px; */
 }
 
 #left-left {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 #progressDiv {
     background-color: #c9abd5;
-    margin: 20px;
+    /* margin: 20px; */
 }
 
 #AduitsResultsDiv{
@@ -231,5 +238,5 @@ img {
     /* height: 100%;
     width: 100%; */
     padding: 20px;
-    margin: 20px;
+    /* margin: 20px; */
 }

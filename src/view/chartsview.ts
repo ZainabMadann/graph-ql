@@ -1,6 +1,22 @@
 import ApexCharts from 'apexcharts'
 import UserRatioModel from '../model/userRatioModel';
+import UserInfoModel from '../model/userInfoModel';
 
+export async function renderUserInfo() {
+    const [info,error] = await UserInfoModel()
+    if(error){
+        console.error(error.message)
+        alert(`error: ${error.message}`)
+        return
+    }
+    const useername = info.FirstName + " " + info.LastName 
+    const  welcomemsg = document.getElementById('welcome-msg')
+    if (!welcomemsg){
+        return
+    }
+    welcomemsg.textContent = "Welcome "+useername +" !"
+
+}
 export async function renderRatioChart(el: HTMLDivElement) {
     const [userdata, error] = await UserRatioModel()
     if (error){
@@ -92,8 +108,8 @@ export function renderProgressChart(el: HTMLDivElement) {
             data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
         }],
         chart: {
-            height: 300,
-            width: 600,
+            height: "50%",
+            width: "100%",
             type: 'line',
             zoom: {
                 enabled: false
@@ -130,8 +146,8 @@ export function renderBestSkillsChart(el: HTMLDivElement) {
         series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
         chart: {
             type: 'polarArea',
-            height: 250,
-            width: 300,
+            height: "100%",
+            width: "100%",
         },
         stroke: {
             colors: ['#fff']

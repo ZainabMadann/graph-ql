@@ -1,5 +1,5 @@
 import van from "vanjs-core";
-import { renderBestSkillsChart, renderProgressChart, renderRatioChart } from "./chartsview";
+import { renderBestSkillsChart, renderProgressChart, renderRatioChart, renderUserInfo } from "./chartsview";
 import { AduitsResultsView, AuditRatioView, UserInfoView } from "./auditsview";
 
 const { div , p , span , br } = van.tags
@@ -16,7 +16,7 @@ function homeview(): HTMLDivElement {
   const bestSkillsDiv = div({id:'bestSkillsDiv'})
 
   const homediv = div({ id: 'home-container' },
-  div(span({id:"welcome-msg"},"Welcome Zainab!")),
+  div(span({id:"welcome-msg"},)),
     div({id:'graphs-container'},
       div({id:'left-container'},
           div({id:'upper-leftDiv'},
@@ -33,7 +33,7 @@ function homeview(): HTMLDivElement {
       ),
     )
   )
-
+  renderUserInfo()
   renderProgressChart(progressDiv)
   renderRatioChart(chartDiv)
   renderBestSkillsChart(bestSkillsDiv)
