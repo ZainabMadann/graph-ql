@@ -28,7 +28,7 @@ export default async function UserRatioModel(): Promise<Result<UserRatio>> {
         return [null, error]
     }
 
-    console.log(data)
+    // console.log(data)
     
     return [{
         // @ts-expect-error data is not null

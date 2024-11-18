@@ -1,6 +1,6 @@
 import ApexCharts from 'apexcharts'
 import UserRatioModel from '../model/userRatioModel';
-import UserInfoModel, { getLastAudit, getLastProject } from '../model/userInfoModel';
+import UserInfoModel, { getBestSkills, getLastAudit, getLastProject } from '../model/userInfoModel';
 
 export async function renderUserInfo() {
     const [info,error] = await UserInfoModel()
@@ -29,7 +29,7 @@ export async function renderUserInfo() {
     }
     lastproject.textContent = project
     const lastaudit = await getLastAudit()
-    console.log(lastaudit)
+    // console.log(lastaudit)
     const lastauditspan = document.getElementById('lastAuditspan')
     if (!lastauditspan){
         return
@@ -163,14 +163,22 @@ export function renderProgressChart(el: HTMLDivElement) {
 
 }
 
-export function renderBestSkillsChart(el: HTMLDivElement) {
+export async function renderBestSkillsChart(el: HTMLDivElement) {
+    const [skills, error] = await getBestSkills()
+    if (error || !skills) {
+        console.error('Error fetching best skills:', error)
+        return
+    }
+    const series = skills.map(skill => skill.amount)
+    const labels = skills.map(skill => skill.type)
     var options = {
-        series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
+        series: series,
         chart: {
             type: 'polarArea',
             height: "100%",
             width: "100%",
         },
+        labels: labels, 
         stroke: {
             colors: ['#fff']
         },

@@ -9,13 +9,18 @@ interface UserInfo {
 
 interface Project {
     Captain: String
-    Name:string
+    Name: string
+}
+
+interface Skill {
+    amount: number
+    type: string
 }
 
 
 export default async function UserInfoModel(): Promise<Result<UserInfo>> {
     const id = await getUserId()
-    
+
     const query: IQueryRequest = {
         query: ` query GetUserInfo($userId: Int) {
   event_user(where: {userId: {_eq: $userId}, eventId: {_eq: 20}}) {
@@ -128,7 +133,7 @@ query LastAudit($userId: Int) {
     }
 }
     `
-    , variables: { userId: id }
+        , variables: { userId: id }
     }
 
     const [data, error] = await fetchQuery(query)
@@ -144,5 +149,49 @@ query LastAudit($userId: Int) {
         // @ts-expect-error data is not null
         Name: data.audit[0].group.object.name
     }, null]
+}
+
+
+
+
+export async function getBestSkills(): Promise<Result<Skill[]>> {
+    const id = await getUserId()
+    const query: IQueryRequest = {
+        query: `      
+query skills($userId: Int) {
+  user(where: {id: {_eq: $userId}}) {
+    transactions(
+      order_by: [{type: desc}, {amount: desc}]
+      distinct_on: [type]
+      where: {userId: {_eq: $userId}, 
+      type: {_in: ["skill_js", "skill_go", "skill_html", "skill_prog", "skill_front-end", "skill_back-end"]}}
+    ) {
+      type
+      amount
+    }
+  }
+}
+    `
+        , variables: { userId: id }
+    }
+
+    const [data, error] = await fetchQuery(query)
+
+    if (error) {
+        return [null, error]
+    }
+    //@ts-ignore
+    const user = data.user[0]
+    if (!user || !user.transactions) {
+        console.error('No skill data found.')
+        throw new Error('No skills available for this user.')
+    }
+
+    const skills: Skill[] = user.transactions.map((transaction: any) => ({
+        type: transaction.type,
+        amount: transaction.amount,
+    }))
+
+    return [skills, null]
 }
 
