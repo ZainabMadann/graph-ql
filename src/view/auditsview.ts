@@ -18,9 +18,9 @@ export function UserInfoView() :HTMLDivElement{
         {id:'userInfo'},
         "Your Current Level is ", span({id:'levelspan'}),
         br()
-        ,"Your Last Project  is ",span({id:'lastprojectspan'}),
+        ,"Your Last Project  is ", span({id:'lastprojectspan'}),
         br()
-        ,"Your Last Audit ",span({id:'lastAuditspan'}),
+        ,"Your Last Audit ", span({id:'lastAuditspan'}),
     )
 }
 

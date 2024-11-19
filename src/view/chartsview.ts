@@ -1,6 +1,6 @@
 import ApexCharts from 'apexcharts'
 import UserRatioModel from '../model/userRatioModel';
-import UserInfoModel, { getBestSkills, getLastAudit, getLastProject } from '../model/userInfoModel';
+import UserInfoModel, { getBestSkills, getLastAudit, getLastProject, getUserProgress } from '../model/userInfoModel';
 
 export async function renderUserInfo() {
     const [info,error] = await UserInfoModel()
@@ -122,12 +122,17 @@ export async function renderRatioChart(el: HTMLDivElement) {
     // }, 0)
 }
 
-export function renderProgressChart(el: HTMLDivElement) {
-
+export async function renderProgressChart(el: HTMLDivElement) {
+    const [progress,error] = await getUserProgress()
+    if (error || !progress) {
+        console.error('Error fetching progress:', error)
+        return
+    }
+    const series = progress.map(progress => progress.Amount / 1000)
     const options = {
         series: [{
-            name: "Desktops",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+            name: "Projects",
+            data: series,
         }],
         chart: {
             height: "50%",
@@ -148,13 +153,13 @@ export function renderProgressChart(el: HTMLDivElement) {
         },
         grid: {
             row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                colors: ['#f3f3f3', 'transparent'], 
                 opacity: 0.5
             },
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-        }
+            show: false,    
+        },
     };
     setTimeout(() => {
         const chart = new ApexCharts(el, options);

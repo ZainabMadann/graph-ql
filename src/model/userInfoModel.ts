@@ -17,6 +17,11 @@ interface Skill {
     type: string
 }
 
+interface Progress {
+    Amount: number
+    Date: string
+    ProjectName: string
+}
 
 export default async function UserInfoModel(): Promise<Result<UserInfo>> {
     const id = await getUserId()
@@ -151,9 +156,6 @@ query LastAudit($userId: Int) {
     }, null]
 }
 
-
-
-
 export async function getBestSkills(): Promise<Result<Skill[]>> {
     const id = await getUserId()
     const query: IQueryRequest = {
@@ -195,3 +197,44 @@ query skills($userId: Int) {
     return [skills, null]
 }
 
+
+export async function getUserProgress(): Promise<Result<Progress[]>> {
+    const query: IQueryRequest = {
+        query: `      
+query{
+  transaction(
+    where: { _and: [
+      {type: { _eq: "xp" }},
+      {object: {type: {_eq: "project"}}}
+    ] }
+    order_by: { createdAt: asc }
+  ){
+    id
+    amount
+     object{
+      type
+      id
+      name
+      updatedAt
+    }
+  }
+}
+    `
+        , variables: {}
+    }
+
+    const [data, error] = await fetchQuery(query)
+
+    if (error) {
+        return [null, error]
+    }
+    //@ts-ignore
+    const transactions = data?.transaction || [];
+    const progress: Progress[] = transactions.map((transaction: any) => ({
+        Amount: transaction.amount,
+        Date: transaction.object.updatedAt,
+        ProjectName: transaction.object.name
+    }));
+
+    return [progress, null]
+}
