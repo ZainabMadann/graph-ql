@@ -214,14 +214,4 @@ export async function renderBestSkillsChart(el: HTMLDivElement) {
 
 
 export async function renderAuditsResultsView(container: HTMLDivElement): Promise<void> {
-    const [audits, error] = await getAllAudits()
-
-    if (error || !audits) {
-        console.error('Failed to fetch audits:', error);
-        container.innerHTML = '<p>Error loading audit results.</p>';
-        return;
-    }
-
-    container.innerHTML = '';
-    container.appendChild(AduitsResultsView(audits))
-}
+    const [audits, error] = await 

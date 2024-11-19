@@ -239,8 +239,17 @@ img {
     width: 100%; */
     padding: 20px;
     /* margin: 20px; */
-}
+    overflow-y: auto; 
 
+}
+#AduitsResultsDiv{
+    height: 100%;
+}
 #projectDiv{
-    background-color: transparent;
+    display: flex;
+    gap: 10px; 
+    background-color: #9f75ad;
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
 }

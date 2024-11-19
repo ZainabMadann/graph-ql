@@ -293,7 +293,7 @@ function calculateExpiry(endAt: string): string{
     const nowDate = new Date()
     const diff = endDate.getTime() - nowDate.getTime()
 
-    if (diff <= 0) return "Expired"
+    if (diff <= 0) return "Done"
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     return `${days} days left`;
 }

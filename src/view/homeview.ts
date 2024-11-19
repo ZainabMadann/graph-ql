@@ -2,7 +2,7 @@ import van from "vanjs-core";
 import { renderAuditsResultsView, renderBestSkillsChart, renderProgressChart, renderRatioChart, renderUserInfo } from "./chartsview";
 import {  AuditRatioView, UserInfoView } from "./auditsview";
 
-const { div , p , span , br } = van.tags
+const { div , span  } = van.tags
 
 export function showHomePage() {
   document.body.innerHTML = ''
