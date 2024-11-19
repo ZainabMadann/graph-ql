@@ -27,3 +27,17 @@ export function UserInfoView() :HTMLDivElement{
         ,"Your Last Audit ", span({id:'lastAuditspan'}),
     )
 }
+
+export function AduitsResultsView(audits: Audit[]):HTMLDivElement{
+    return div(
+        { id: 'AduitsResultsDiv' },
+        ...audits.map((audit) =>
+            div(
+                { id: "projectDiv" },
+                span({ id: 'projectName' }, audit.ProjectName),
+                span({ id: 'result' }, audit.Result.toString()),
+                span({ id: 'ExpiresIn' }, audit.ExpiresIn)
+            )
+        )
+    );
+}

@@ -36,4 +36,6 @@ export default async function UserRatioModel(): Promise<Result<UserRatio>> {
         // @ts-expect-error data is not null
         totalUp: data.user[0].totalUp,
         // @ts-expect-error data is not null
-            totalDown: data.user[0].tot
+            totalDown: data.user[0].totalDown,
+        }, null]
+}
