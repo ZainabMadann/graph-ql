@@ -1,5 +1,9 @@
 import van from "vanjs-core";
-
+interface Audit {
+    ProjectName: string
+    Result:String
+    ExpiresIn: string
+}
 const { div , p  , span , br } = van.tags
 
 export function AuditRatioView(el : HTMLDivElement) :HTMLDivElement{
@@ -24,12 +28,16 @@ export function UserInfoView() :HTMLDivElement{
     )
 }
 
-export function AduitsResultsView():HTMLDivElement{
-        return div({id:'AduitsResultsDiv'},
-            "rtf : PASS",
-            br(),
-            "fourm : PASS",
-            br(),
-            "net-cat : FAIL")
-    
+export function AduitsResultsView(audits: Audit[]):HTMLDivElement{
+    return div(
+        { id: 'AduitsResultsDiv' },
+        ...audits.map((audit) =>
+            div(
+                { id: "projectDiv" },
+                span({ id: 'projectName' }, audit.ProjectName),
+                span({ id: 'result' }, audit.Result.toString()),
+                span({ id: 'ExpiresIn' }, audit.ExpiresIn)
+            )
+        )
+    );
 }

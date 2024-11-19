@@ -23,6 +23,12 @@ interface Progress {
     ProjectName: string
 }
 
+interface Audit {
+    ProjectName: string
+    Result:String
+    ExpiresIn: string
+}
+
 export default async function UserInfoModel(): Promise<Result<UserInfo>> {
     const id = await getUserId()
 
@@ -237,4 +243,67 @@ query{
     }));
 
     return [progress, null]
+}
+
+
+export async function getAllAudits(): Promise<Result<Audit[]>> {
+    const id = await getUserId()
+    const query: IQueryRequest = {
+        query: `      
+query GetAudits($userId: Int!) {
+  audit(
+    distinct_on: [resultId]
+    where: {_or: [{auditorId: {_eq: $userId}}, {group: {members: {userId: {_eq: $userId}}}}], _and: [{_or: [{_and: [{resultId: {_is_null: true}}, {grade: {_is_null: true}}]}, {grade: {_is_null: false}}]}]}
+    order_by: [{resultId: desc}]
+  ) {
+    grade
+    endAt
+    group {
+      captainLogin
+      object{
+        name
+      }
+    }
+    resultId
+  }
+}
+    `
+        , variables: {userId: id}
+    }
+
+    const [data, error] = await fetchQuery(query)
+
+    if (error) {
+        return [null, error]
+    }
+    //@ts-ignore
+    const audit = data.audit
+    const audits: Audit[] = audit.map((audit: any) => ({
+        Result: getAuditResult(audit.grade),
+        ProjectName: audit.group.object.name ,
+        ExpiresIn: audit.endAt ? calculateExpiry(audit.endAt) : "Expired",
+    }));
+
+    return [audits, null]
+}
+
+
+function calculateExpiry(endAt: string): string{
+    const endDate = new Date(endAt)
+    const nowDate = new Date()
+    const diff = endDate.getTime() - nowDate.getTime()
+
+    if (diff <= 0) return "Expired"
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    return `${days} days left`;
+}
+
+function getAuditResult(grade: number | null): string {
+    if (grade === null) {
+        return "Not Done Yet";
+    } else if (grade >= 1) {
+        return "Pass";
+    } else {
+        return "Fail";
+    }
 }
