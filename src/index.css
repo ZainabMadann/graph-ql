@@ -160,15 +160,19 @@ img {
 
 #right-container {
     width: 50%;
-    height: 100%;
+    /* height: 100%; */
+    flex-grow: 1;
+    overflow: scroll;
+    background-color: #a786b2;
 }
 
 #graphs-container {
     display: flex;
     flex-direction: row;
     gap: 40px;
-    height: 100%;
+    /* height: 100%; */
     padding: 0 20px;
+    overflow: hidden;
 }
 
 #upper-leftDiv {
@@ -231,6 +235,9 @@ img {
 #progressDiv {
     background-color: #c9abd5;
     /* margin: 20px; */
+    /* padding: 10px; */
+    /* height: 100%; */
+    overflow: scroll;
 }
 
 #AduitsResultsDiv{

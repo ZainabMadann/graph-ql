@@ -28,10 +28,8 @@ export function UserInfoView() :HTMLDivElement{
     )
 }
 
-export function AduitsResultsView(audits: Audit[]):HTMLDivElement{
-    return div(
-        { id: 'AduitsResultsDiv' },
-        ...audits.map((audit) =>
+export function AduitsResultsView(audits: Audit[]):HTMLDivElement[] {
+    return audits.map((audit) =>
             div(
                 { id: "projectDiv" },
                 span({ id: 'projectName' }, audit.ProjectName),
@@ -39,5 +37,5 @@ export function AduitsResultsView(audits: Audit[]):HTMLDivElement{
                 span({ id: 'ExpiresIn' }, audit.ExpiresIn)
             )
         )
-    );
+    
 }

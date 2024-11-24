@@ -136,7 +136,7 @@ export async function renderProgressChart(el: HTMLDivElement) {
             data: series,
         }],
         chart: {
-            height: "50%",
+            height: "90%",
             width: "100%",
             type: 'line',
             zoom: {
@@ -223,5 +223,5 @@ export async function renderAuditsResultsView(container: HTMLDivElement): Promis
     }
 
     container.innerHTML = '';
-    container.appendChild(AduitsResultsView(audits))
+    container.append(...AduitsResultsView(audits))
 }
