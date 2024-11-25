@@ -254,7 +254,7 @@ img {
 }
 #projectDiv{
     display: flex;
-    gap: 10px; 
+    gap: 15px; 
     background-color: #9f75ad;
     margin: 10px;
     padding: 10px;

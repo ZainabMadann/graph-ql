@@ -1,3 +1,4 @@
+import { logoutHandler } from "./logout";
 import { IQueryRequest, Result } from "./types";
 
 export async function fetchQuery(query:IQueryRequest): Promise<Result<object>> {
@@ -21,6 +22,7 @@ export async function fetchQuery(query:IQueryRequest): Promise<Result<object>> {
 
         // if token is expired
         if ('errors' in data) {
+            logoutHandler()
             return [null, new Error(data.errors[0].message)]
         }
 

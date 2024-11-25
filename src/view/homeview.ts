@@ -1,6 +1,7 @@
 import van from "vanjs-core";
 import { renderAuditsResultsView, renderBestSkillsChart, renderProgressChart, renderRatioChart, renderUserInfo } from "./chartsview";
 import {  AuditRatioView, UserInfoView } from "./auditsview";
+import { logoutHandler } from "../logout";
 
 const { div , span  , button} = van.tags
 
@@ -17,7 +18,7 @@ function homeview(): HTMLDivElement {
   const auditsDiv = div({ id: 'auditsDiv' })
 
   const homediv = div({ id: 'home-container' },
-  div({id:"upperdiv"},span({id:"welcome-msg"},) ,button({id:'logoutbtn'},"Logout")),
+  div({id:"upperdiv"},span({id:"welcome-msg"},) ,button({id:'logoutbtn',onclick:logoutHandler},"Logout")),
     div({id:'graphs-container'},
       div({id:'left-container'},
           div({id:'upper-leftDiv'},
