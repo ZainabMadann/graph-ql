@@ -18,7 +18,7 @@ body {
     gap: 20px;
 }
 
-/* #loginbox {
+ #loginbox {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -43,7 +43,7 @@ input {
     box-sizing: border-box;
 }
 
-button {
+#loginbutton {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -52,10 +52,10 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+#loginbutton:hover {
     background-color: #755f7d;
 }
-
+/*
 img {
     width: 100px;
     height: 100px;
@@ -259,4 +259,25 @@ img {
     margin: 10px;
     padding: 10px;
     font-size: 20px;
+}
+
+#upperdiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+#logoutbtn{
+    padding: 10px;
+    border: none;
+    /* border-radius: 5px; */
+    background-color: #967AA1;
+    color: white;
+    cursor: pointer;
+    font-size: large;
+}
+
+#logoutbtn:hover {
+    background-color: #755f7d;
 }

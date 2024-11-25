@@ -12,10 +12,17 @@ export function showLoginPage() {
 
 function loginView(): HTMLDivElement {
 
-    return div(form({ id: 'loginbox', onsubmit: loginHandler},
-        input({ id: 'username', type: 'text', placeholder: 'Email or Username', required: 'true' }),
-        input({ id: 'password', type: 'password', placeholder: 'password', required: 'true' }),
-        button({ id: 'submit-button', textContent: 'SUBMIT', type: 'submit' })))
+    return div(
+        { id: 'wrapper' }, 
+        div(
+            form(
+                { id: 'loginbox', onsubmit: loginHandler },
+                input({ id: 'username', type: 'text', placeholder: 'Email or Username', required: true }),
+                input({ id: 'password', type: 'password', placeholder: 'Password', required: true }),
+                button({ id: 'loginbutton', textContent: 'SUBMIT', type: 'submit' })
+            )
+        )
+    )
 }
 
 async function loginHandler(e: SubmitEvent) {
