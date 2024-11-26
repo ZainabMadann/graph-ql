@@ -280,7 +280,7 @@ img {
 #auditsTable thead tr{
     background-color: #835692;
     text-align: left;
-
+    padding: 10px;
 }
 #upperdiv{
     display: flex;
