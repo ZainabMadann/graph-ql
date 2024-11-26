@@ -130,9 +130,11 @@ export async function renderProgressChart(el: HTMLDivElement) {
         return
     }
     const series = progress.map(progress => progress.Amount / 1000)
+    const project = progress.map(progress => progress.ProjectName)
+
     const options = {
         series: [{
-            name: "Projects",
+            name: "xp",
             data: series,
         }],
         chart: {
@@ -159,7 +161,10 @@ export async function renderProgressChart(el: HTMLDivElement) {
             },
         },
         xaxis: {
-            show: false,    
+            labels: {
+                show: false, 
+            },
+            categories: project, 
         },
     };
     setTimeout(() => {
