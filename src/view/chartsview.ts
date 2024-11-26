@@ -228,5 +228,5 @@ export async function renderAuditsResultsView(container: HTMLDivElement): Promis
     }
 
     container.innerHTML = '';
-    container.append(...AduitsResultsView(audits))
+    container.append(AduitsResultsView(audits))
 }

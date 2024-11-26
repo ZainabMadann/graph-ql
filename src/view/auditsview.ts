@@ -4,7 +4,7 @@ interface Audit {
     Result:String
     ExpiresIn: string
 }
-const { div , p  , span , br } = van.tags
+const { div , p  , span , br , table , thead , tr , tbody , th , td } = van.tags
 
 export function AuditRatioView(el : HTMLDivElement) :HTMLDivElement{
     return div({ id: 'RatioDiv' },
@@ -28,14 +28,37 @@ export function UserInfoView() :HTMLDivElement{
     )
 }
 
-export function AduitsResultsView(audits: Audit[]):HTMLDivElement[] {
-    return audits.map((audit) =>
-            div(
-                { id: "projectDiv" },
-                span({ id: 'projectName' }, audit.ProjectName),
-                span({ id: 'result' }, audit.Result.toString()),
-                span({ id: 'ExpiresIn' }, audit.ExpiresIn)
+export function AduitsResultsView(audits: Audit[]):HTMLTableElement {
+    // return audits.map((audit) =>
+    //         div(
+    //             { id: "projectDiv" },
+    //             span({ id: 'projectName' }, audit.ProjectName),
+    //             span({ id: 'result' }, audit.Result.toString()),
+    //             span({ id: 'ExpiresIn' }, audit.ExpiresIn)
+    //         )
+    //     )
+    return table(
+        { id: "auditsTable" },
+        thead(
+            tr(
+                { className: "projectRow" }, 
+                th("Project Name"),
+                th("Captain Login"),
+                th("Result"),
+                th("Expires In")
+            )
+        ),
+        tbody(
+            ...audits.map((audit) =>
+                tr(
+                    { className: "projectRow" }, 
+                    td( audit.ProjectName),
+                    //@ts-ignore
+                    td( audit.CaptainLogin),
+                    td( audit.Result.toString()),
+                    td( audit.ExpiresIn)
+                )
             )
         )
-    
+    );
 }

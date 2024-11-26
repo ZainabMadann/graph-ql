@@ -25,6 +25,7 @@ interface Progress {
 
 interface Audit {
     ProjectName: string
+    CaptainLogin:string
     Result:String
     ExpiresIn: string
 }
@@ -250,23 +251,36 @@ export async function getAllAudits(): Promise<Result<Audit[]>> {
     const id = await getUserId()
     const query: IQueryRequest = {
         query: `      
-query GetAudits($userId: Int!) {
-  audit(
-    distinct_on: [resultId]
-    where: {_or: [{auditorId: {_eq: $userId}}, {group: {members: {userId: {_eq: $userId}}}}], _and: [{_or: [{_and: [{resultId: {_is_null: true}}, {grade: {_is_null: true}}]}, {grade: {_is_null: false}}]}]}
-    order_by: [{resultId: desc}]
-  ) {
-    grade
-    endAt
-    group {
-      captainLogin
-      object{
-        name
-      }
-    }
-    resultId
-  }
-}
+
+        query GetAudits($userId: Int!) {
+            audit(
+              distinct_on: [resultId]
+              where: {
+                   auditorId: { _eq: $userId }
+                ,
+                _and: [
+                  {
+                    _or: [
+                      { _and: [{ resultId: { _is_null: true } }, { grade: { _is_null: true } }] },
+                      { grade: { _is_null: false } }
+                    ]
+                  }
+                ]
+              }
+              order_by: [{ resultId: desc }]
+            ) {
+              grade
+              endAt
+              group {
+                captainLogin
+                object {
+                  name
+                }
+              }
+              resultId
+            }
+          }
+          
     `
         , variables: {userId: id}
     }
@@ -282,6 +296,7 @@ query GetAudits($userId: Int!) {
         Result: getAuditResult(audit.grade),
         ProjectName: audit.group.object.name ,
         ExpiresIn: audit.endAt ? calculateExpiry(audit.endAt) : "Expired",
+        CaptainLogin: audit.group.captainLogin,
     }));
 
     return [audits, null]

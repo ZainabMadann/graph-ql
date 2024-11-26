@@ -162,8 +162,8 @@ img {
     width: 50%;
     /* height: 100%; */
     flex-grow: 1;
-    overflow: scroll;
     background-color: #a786b2;
+    overflow: scroll;
 }
 
 #graphs-container {
@@ -222,7 +222,8 @@ img {
 #bestSkillsDiv {
     background-color: #bd9ddf;
     width: 50%;
-    padding-top: 10px;
+    padding-top: 80px;
+
     /* margin: 20px; */
 }
 
@@ -252,15 +253,35 @@ img {
 #AduitsResultsDiv{
     height: 100%;
 }
-#projectDiv{
+/* #projectDiv{
     display: flex;
     gap: 15px; 
     background-color: #9f75ad;
     margin: 10px;
     padding: 10px;
     font-size: 20px;
+} */
+
+.projectRow {
+    background-color: #9f75ad; 
+    font-size: 20px; 
 }
 
+.projectRow td {
+    padding: 10px;
+}
+
+#auditsTable{
+    width: 100% ;
+    padding: 5px;
+    /* border-collapse: separate; */
+}
+
+#auditsTable thead tr{
+    background-color: #835692;
+    text-align: left;
+
+}
 #upperdiv{
     display: flex;
     flex-direction: row;
@@ -271,13 +292,15 @@ img {
 #logoutbtn{
     padding: 10px;
     border: none;
-    /* border-radius: 5px; */
+    border-radius: 5px;
     background-color: #967AA1;
     color: white;
     cursor: pointer;
     font-size: large;
+    transition: border-radius ease 0.1s;
 }
 
 #logoutbtn:hover {
+    border-radius: 8px;
     background-color: #755f7d;
 }
