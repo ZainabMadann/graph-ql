@@ -8,9 +8,9 @@ export async function logoutHandler(){
     const jwt = localStorage.getItem('jwt')
 
     try {
-        const response = await fetch('https://learn.reboot01.com/api/auth/expire', {
+        const response = await fetch('https://learn.reboot01.com/api/auth/signout', {
             
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'x-jwt-token': `${jwt}`,
             }
