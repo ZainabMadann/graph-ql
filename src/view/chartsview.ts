@@ -138,7 +138,7 @@ export async function renderProgressChart(el: HTMLDivElement) {
             data: series,
         }],
         chart: {
-            height: "90%",
+            height: 290,
             width: "100%",
             type: 'line',
             zoom: {

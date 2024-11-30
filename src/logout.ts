@@ -22,10 +22,8 @@ export async function logoutHandler(){
             throw new Error('Logout failed')
         }
 
-        showLoginPage()
     } catch (error) {
-        console.error('Error:', error);
-        alert('logout failed.')
+        console.error(error)
     }
-    
+    showLoginPage()
 }

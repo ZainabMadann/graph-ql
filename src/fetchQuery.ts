@@ -20,7 +20,6 @@ export async function fetchQuery(query:IQueryRequest): Promise<Result<object>> {
 
         const data = await response.json()
 
-        // if token is expired
         if ('errors' in data) {
             logoutHandler()
             return [null, new Error(data.errors[0].message)]
@@ -28,6 +27,9 @@ export async function fetchQuery(query:IQueryRequest): Promise<Result<object>> {
 
         return [data.data, null]
     } catch (error) {
+        if (error instanceof Error && error.message.includes('JWTExpired')) {
+            logoutHandler()
+        }
         return [null, error as Error]
     } 
 }
